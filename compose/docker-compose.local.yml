@@ -1,0 +1,27 @@
+volumes:
+  discourse_local_postgres_data: {}
+  discourse_local_postgres_data_backups: {}
+  discourse_local_redis_data: {}
+
+services:
+  postgres:
+    build:
+      context: ..
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: discourse_production_postgres
+    container_name: discourse_local_postgres
+    volumes:
+      - discourse_local_postgres_data:/var/lib/postgresql/data
+      - discourse_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local.docker/.postgres
+    ports:
+      - "5433:5432"
+
+  redis:
+    image: docker.io/redis:6
+    container_name: discourse_local_redis
+    volumes:
+      - discourse_local_redis_data:/data
+    ports:
+      - "6380:6379"

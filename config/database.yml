@@ -19,6 +19,10 @@ development:
     ###   - rebake all to posts using: `RAILS_ENV=production bundle exec rake posts:rebake`
     - "<%= ENV['DISCOURSE_HOSTNAME'] || 'localhost' %>"
   variables: <%= db_variables.to_json %>
+  host: <%= ENV['DISCOURSE_DB_HOST'] || 'localhost' %>
+  port: <%= ENV['DISCOURSE_DB_PORT'] || 5432 %>
+  username: <%= ENV['DISCOURSE_DB_USERNAME'] || 'discourse' %>
+  password: <%= ENV['DISCOURSE_DB_PASSWORD'] || '' %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
